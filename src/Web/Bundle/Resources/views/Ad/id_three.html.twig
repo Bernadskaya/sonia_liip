@@ -1,0 +1,37 @@
+<div id="about" class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-sm-12">
+                <div class=" container TitleSection">
+                    <header class="page-head">
+                        {% for entity in entities if entity.getAdGroup.id == '3'  %}
+                            {% if loop.first %}
+                                <h1>{{ entity.getAdGroup.title }}</h1>
+                            {% endif %}
+                        {% endfor %}
+                    </header>
+                </div>
+                {% for entity in entities  %}
+                    {% if entity.getAdGroup.id == '3'  %}
+                        <div class="row">
+                            <div class="about_wrap_one">
+                                <div class="hexagon"> <a href="/#about"> <span class="mask"></span>
+                                        {% if entity.getMedia %}
+                                            <img src="{% path entity.getMedia, 'thumb' %}">
+                                        {% endif %}
+                                    </a>
+                                    <div class="portfolio-title">
+                                        <h4>{{ entity.title }}<span>{{ entity.title }}</span></h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    {{ entity.text|raw('html') }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

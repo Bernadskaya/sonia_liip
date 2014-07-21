@@ -1,0 +1,50 @@
+{% extends 'AntWebBundle::layout.html.twig' %}
+{% block metakeywords %}
+    <meta name="keywords" content="{{ entity.metaKey }}">
+    <meta name="description" content="{{ entity.metaDesc }}">
+    <meta name="title" content="{{ entity.title }}"/>
+{% endblock %}
+{% block content %}
+    {% trans_default_domain "AntWebBundle" %}
+    <div id="blog" class="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb"><li>Главная</li>
+                        <li><a href="{{ path('news') }}">Новости</a></li>
+                        <li class="active">{{ entity.title }}</li>
+                    </ol>
+                </div>
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div class="blog_wrap">
+                        <div class="blog">
+                            <div class="blog_info">
+
+                                <div class="blog_title">
+                                    <h1><a href="#">{{ entity.title }}</a></h1>
+                                </div>
+                            </div>
+                            <div class="blog_body">
+                                <div class="blog_image">
+                                    {% if entity.getMedia %}
+                                        <img src="{% path entity.getMedia, 'blog_show' %}">
+                                    {% endif %}
+                                </div>
+                                <div class="lead">
+                                    {{ entity.description }}
+                                </div>
+                                <div>
+                                    {{ entity.text |raw('html') }}
+                                </div>
+                                <div class="wrap">
+                                    {{ 'news.updated'| trans({}, 'AntWebBundle') }}  {{ entity.updated|date('d.m.y H:i') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

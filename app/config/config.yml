@@ -1,0 +1,169 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: @AntAdminBundle/Resources/config/admin.yml }
+    - { resource: @AntWebBundle/Resources/config/ant_config.yml }
+
+framework:
+    #esi:             ~
+    translator: { fallback: ru }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments:       ~
+
+
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+            resources:
+                # other files
+                - 'AntMediaBundle:Form:media_widgets.html.twig'
+                - 'AntAdminBundle:Form:tinymce.html.twig'
+
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        ['AntWebBundle','WebBundle', 'AntAdminBundle','WebMediaBundle', 'AntMediaBundle']
+    #java: /usr/bin/java
+    write_to: %kernel.root_dir%/../web
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        yui_css:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
+        yui_js:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
+
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        types: #this is about this line and line below
+                    json:     Sonata\Doctrine\Types\JsonType
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+
+stof_doctrine_extensions:
+    default_locale: ru
+    translation_fallback: true
+    orm:
+        default:
+            sluggable: true
+            tree: true
+            timestampable: true
+            softdeleteable: true
+
+
+knp_menu:
+    twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
+        template: AntWebBundle::knp_menu.html.twig
+    templating: false # if true, enables the helper for PHP templates
+    default_renderer: twig # The renderer to use, list is also available by default
+
+sonata_media:
+    # if you don't use default namespace configuration
+    class:
+        media: Ant\MediaBundle\Entity\Media
+        gallery: Ant\MediaBundle\Entity\Gallery
+        gallery_has_media: Ant\MediaBundle\Entity\GalleryHasMedia
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                big:   { width: 1500 , quality: 100}
+    cdn:
+        server:
+            path:  # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+    providers:
+        image:
+            thumbnail:  sonata.media.thumbnail.liip_imagine
+
+liip_imagine:
+    filter_sets:
+        default_small:
+            quality: 85
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [150, 150], mode: inset }
+                relative_resize: { heighten: 100 }
+        default_carousel:
+            quality: 80
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [1140, 750], mode: outbound }
+        default_gallery:
+            quality: 75
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+        default_gallery_big:
+            quality: 80
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [900, 600], mode: inset }
+                background: { size: [900, 600], color: '#faebd7' }
+        default_thumb:
+            quality: 75
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [200, 200], mode: outbond }
+        default_about:
+            quality: 75
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [300, 300], mode: outbound }
+        default_blog:
+            quality: 75
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [161, 179], mode: outbound }
+        default_blog_show:
+            quality: 75
+            controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
+            filters:
+                thumbnail: { size: [600, 300], mode: outbound }

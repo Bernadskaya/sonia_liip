@@ -1,0 +1,25 @@
+{% extends 'WebBundle::layout.html.twig' %}
+{% block metakeywords %}
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="title" content=""/>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@WebBundle/Resources/public/css/flexslider.css' filter='yui_css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+{% block content %}
+    {{ include('WebBundle:Ad:id_one.html.twig') }}
+    {{ render(controller('AntMediaBundle:Gallery:last', {'max': 10})) }}
+    {{ include('WebBundle:Ad:id_two.html.twig') }}
+    {{ include('WebBundle:Ad:id_three.html.twig') }}
+    {{ include('WebBundle:OrderForm:welcome.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent () }}
+    {% javascripts '@WebBundle/Resources/public/js/flexslider.js' filter='yui_js'%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

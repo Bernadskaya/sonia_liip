@@ -1,0 +1,130 @@
+{% extends 'WebBundle::layout.html.twig' %}
+{% block content %}
+    <div id="order_new" class="order">
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center"> {{ 'order.new'|trans({}, 'AntWebBundle') }}</h1>
+            </div>
+            <div class="contact_wrap">
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+                <div class="col-md-6 col-md-offset-3 col-sm-12">
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                    <div class="form-group">
+                        {{ form_label(form.name, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.name,  {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        {% if form_errors(form.name) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.name) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.surname, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.surname,  {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        {% if form_errors(form.surname) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.surname) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.phone, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.phone,  {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        {% if form_errors(form.email) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.phone) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.email, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.email,  {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        {% if form_errors(form.email) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.email) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.text, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.text,  {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        {% if form_errors(form.text) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.text) }}
+                            </div>
+                        {%  endif %}
+                    </div>
+                    <div class="hidden">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            {% set terms_link %}
+                            <a title="{% trans %}Read the General Terms and Conditions{% endtrans %}" href="" data-toggle="modal" data-target="#myModal">
+                                {% trans %}General Terms and Conditions{% endtrans %}
+                            </a>
+                            {% endset %}
+                            {% set general_terms_and_conditions %}
+                            {{ 'I have read and accept the %general_terms_and_conditions%.'|trans({ '%general_terms_and_conditions%': terms_link })|raw }}
+                            {% endset %}
+                            {{ form_widget(form.agreement,  {'attr': {'class': 'form-control'}}) }}
+                            <label for="{{ form.agreement.vars.id }}">{{ general_terms_and_conditions|raw }}</label>
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Соглашение об обработке персональных данных</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if form_errors(form.agreement) %}
+                            <div class="alert-danger row">
+                                {{ form_errors(form.agreement) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.captcha, 'Введите код', {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                        <div class="col-sm-9">
+                            {{ form_widget(form.captcha,  {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        {% if form_errors(form.captcha) %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form.captcha) }}
+                            </div>
+                        {%  endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.submit, 'Отправить заявку') }}
+                        <div class="col-sm-offset-3 col-sm-9">
+                            {{ form_widget(form.submit,  {'label':'Отправить','attr': {'class': 'btn btn-default'}}) }}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <ul class="record_actions">
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+<div class="element Logo_design copywriting" data-category="Logo_design">
+    <div class="hexagon">
+        <a href="{{ url('sonata_media_gallery_view', {'id' : gallery|sonata_urlsafeid,'slug': gallery.slug }) }}"><span class="mask"></span>
+            {{ render(controller('AntMediaBundle:Gallery:thumb', { 'id': gallery|sonata_urlsafeid } )) }}
+        </a>
+        <div class="portfolio-title">
+            <h4>{{ gallery.name }}<span>{{ gallery.name }}</span></h4>
+        </div>
+    </div>
+</div>

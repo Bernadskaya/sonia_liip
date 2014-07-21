@@ -1,0 +1,5 @@
+{% for galleryHasMedia in gallery.GalleryHasMedias %}
+    {% if loop.first %}
+        <img src="{% path galleryHasMedia.media, 'thumb' %}"/>
+    {% endif %}
+{% endfor %}

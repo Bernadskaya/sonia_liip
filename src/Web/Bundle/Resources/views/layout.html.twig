@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Forum&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    {% stylesheets filter='yui_css'
+    '@WebBundle/Resources/public/css/bootstrap.css'
+    '@WebBundle/Resources/public/css/custom.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <link href="{{ asset('bundles/web/css//ie_8.css') }}" rel="stylesheet" />
+    <script src="{{ asset('bundles/web/js/ie/html5shiv.js') }}"></script>
+    <script src="{{ asset('bundles/web/js/ie/respond.min.js') }}"></script>
+    <![endif]-->
+{% endblock %}
+{% block body %}
+    {% block header %}
+        <header class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="row topinfo">
+                    <div class="col-xs-12 col-sm-12 col-md-12 pull-right text-right">+7 916 612 82 72</div>
+                </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <a class="navbar-brand logo" href="/">Софья Хайруллова</a> </div>
+                <div class="navbar-collapse collapse ">
+                    {{ knp_menu_render('WebBundle:FrontendBuilder:mainMenu') }}
+                </div>
+            </div>
+        </header>
+    {% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}
+        {{ render(controller('AntWebBundle:Ad:listOneGroup', {'adGroupTemplate': 'WebBundle:Ad:footer.html.twig', 'id':5})) }}
+    {% endblock %}
+{% endblock %}
+{% block javascripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    {% javascripts filter='yui_js'
+    '@WebBundle/Resources/public/js/bootstrap.min.js'
+    '@WebBundle/Resources/public/js/modernizr.custom.js'
+    '@WebBundle/Resources/public/js/nicescroll.js'
+    '@WebBundle/Resources/public/js/pace.min.js'
+    '@WebBundle/Resources/public/js/isotope.js'
+    '@WebBundle/Resources/public/js/custom.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

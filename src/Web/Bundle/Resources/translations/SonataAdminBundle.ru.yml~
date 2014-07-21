@@ -1,0 +1,4 @@
+link_add: __link_add
+link_list: __link_list
+Admin: __Admin
+confirm_exit: __confirm_exit

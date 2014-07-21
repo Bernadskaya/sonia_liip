@@ -1,0 +1,28 @@
+{% extends 'WebBundle::layout.html.twig' %}
+    {% block metakeywords %}
+        <meta name="keywords" content="{{ entity.metaKey }}"/>
+        <meta name="description" content="{{ entity.metaDesc }}"/>
+        <meta name="title" content="{{ entity.title }}"/>
+    {% endblock %}
+    {% block content%}
+        <div class="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="breadcrumb">
+                            <li><a href="{{ path('news') }}"> Главная</a></li>
+                            <li class="active">{{ entity.title }}</li>
+                        </ol>
+                    </div>
+                    <div class=" container TitleSection">
+                        <header class="page-head">
+                            <h1>{{ entity.title }}</h1>
+                        </header>
+                    </div>
+                    <div class="col-xs-12 col-md-12 col-sm-12">
+                        <div>{{ entity.text | raw('html') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

@@ -1,0 +1,28 @@
+<div id="top" class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-sm-12">
+                <div class="flexslider" id="slider">
+                    <ul class="slides">
+                        {% for entity in entities if entity.getAdGroup.id == '1' %}
+                            <li class="flex-section">
+                                {% if entity.getMedia %}
+                                    <img src="{% path entity.getMedia, 'carousel' %}">
+                                {% endif %}
+                                {% if entity.title %}
+                                <div class="flex-caption">
+                                    {{ entity.title }}
+                                </div>
+                                {% endif %}
+                                <div class="flex-description">
+                                    {{ entity.text|raw('html') }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

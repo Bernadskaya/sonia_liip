@@ -1,0 +1,114 @@
+web:
+    resource: "@WebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gallery:
+    resource: '@AntMediaBundle/Resources/config/routing/gallery.yml'
+    prefix: /portfolio
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
+
+_imagine:
+    resource: .
+    type:     imagine
+
+ant:
+    resource: "@AntWebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ad:
+    pattern:  /
+    defaults: { _controller: "AntWebBundle:Ad:index" }
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+web_about:
+    pattern: /#about
+    defaults: { _controller: "AntWebBundle:Ad:index" }
+
+ant_order:
+    resource: "@AntWebBundle/Resources/config/routing/orderform.yml"
+    prefix:   /order
+
+
+AntWebBundle_news:
+    resource: "@AntWebBundle/Resources/config/routing/news.yml"
+    prefix:   /news
+
+ant_admin:
+    resource: "@AntAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+ad:
+    pattern:  /
+    defaults: { _controller: "AntWebBundle:Ad:index" }
+
+_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AntWebBundle:Ad:show" }
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+
+_imagine:
+    resource: .
+    type:     imagine
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+page_contacts:
+    pattern: /contacts
+    defaults: { _controller: "AntWebBundle:Page:show", id: "1" }

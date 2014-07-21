@@ -1,0 +1,25 @@
+{% extends 'WebBundle:Ad:index.html.twig' %}
+{% block content %}
+    <div class="portfolio">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb"><li><a href="{{ path('ad') }}">Главная</a></li>
+                    <li class="active"><a href="{{ path('sonata_media_gallery_index') }}">Портфолио</a></li>
+                </ol>
+            </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12">
+                    <div id="filter_container" class="clearfix portfolioContainer">
+                        {% for gallery in galleries %}
+                            {{ include ('WebMediaBundle:Gallery:_thumb_style.html.twig') }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'WebBundle::layout.html.twig' %}
+{% block metakeywords %}
+    {#<meta name="keywords" content="{{ entity.metaKey }}">#}
+    {#<meta name="description" content="{{ entity.metaDesc }}">#}
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 'bundles/web/css/flexgallery.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+{% endblock %}
+{% block content %}
+    <div class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                <ol class="breadcrumb"><li>Главная</li>
+                    <li><a href="{{ path('sonata_media_gallery_index') }}">Портфолио</a></li>
+                    <li class="active">{{ gallery.name }}</li>
+                </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="flexslider" id="gallery">
+                        <ul class="slides">
+                            {% for galleryHasMedia in gallery.GalleryHasMedias %}
+                                <li data-thumb="{% path galleryHasMedia.media, 'gallery' %}">
+                                    <img src="{% path galleryHasMedia.media, 'gallery_big' %}"/>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="galleryTitle">
+                            <h1>{{ gallery.name }}</h1>
+                        <div class="lead">{{ gallery.description | raw ('html') }}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {#{{ parent() }}#}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('bundles/web/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/web/js/pace.min.js') }}" ></script> <!--page load progress bar-->
+    <script src="{{ asset('bundles/web/js/jquery.flexslider.js') }}"></script>
+    {#<script src="{{ asset('bundles/web/js/custom.js') }}"></script><!-- Custom JavaScript  -->#}
+    <!-- FlexGallery init -->
+    <script>
+        $(document).ready(function() {
+
+            $('div#gallery.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+
+{% endblock %}

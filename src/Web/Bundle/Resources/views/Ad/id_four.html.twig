@@ -1,0 +1,38 @@
+<div id="work" class="projects">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-sm-12">
+                <div class=" container TitleSection">
+                    <header class="page-head">
+                        {% for entity in entities if entity.getAdGroup.id == '4'  %}
+                            {% if loop.first %}
+                                <h1>{{ entity.getAdGroup.title }}</h1>
+                            {% endif %}
+                        {% endfor %}
+                    </header>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12 col-sm-12">
+                        <div class="project_wrap">
+                            <ul class="cbp-ig-grid">
+                                {% for entity in entities  %}
+                                    {% if entity.getAdGroup.id == '4'  %}
+                                        <li>
+                                            <a href="#">
+                                                <span class="{{ entity.icon }}">&shy;</span>
+                                                <h3 class="cbp-ig-title">{{ entity.title }}</h3>
+                                                <span class="cbp-ig-category">{{ entity.text|raw('html') }}</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
